@@ -1,0 +1,36 @@
+﻿<Window x:Class="MvvmLigthBugExposition.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MvvmLigthBugExposition"
+        xmlns:viewModels="clr-namespace:MvvmLigthBugExposition.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525" d:DataContext="{d:DesignInstance viewModels:MainViewModel}">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModels:DetailViewModel}">
+            <StackPanel HorizontalAlignment="Stretch">
+                <Button Command="{Binding UseVariableCommand}" Margin="0,5">With Bug</Button>
+                <Button Command="{Binding UseFieldCommand}" Margin="0,5">With out Bug</Button>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button HorizontalAlignment="Stretch" Command="{Binding SetContent100PercentBugProbabilityCommand}" Margin="0,5">Set New Content 100% bug probability</Button>
+
+        <Button HorizontalAlignment="Stretch" Command="{Binding SetContent50PercentBugProbabilityCommand}" Grid.Row="1" Margin="0,5">Set New Content 50% bug probability</Button>
+
+        <Border Grid.Row="2" BorderThickness="4" BorderBrush="BlueViolet">
+            <ContentPresenter 
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Content="{Binding Content}"/>
+        </Border>
+        
+    </Grid>
+</Window>
